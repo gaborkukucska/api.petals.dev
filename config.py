@@ -4,11 +4,11 @@ from petals.constants import PUBLIC_INITIAL_PEERS
 from data_structures import ModelBackendConfig, ModelChatConfig, ModelConfig, ModelFrontendConfig
 
 default_chat_config = ModelChatConfig(
-    max_session_length=8192,
+    max_session_length=100000,
     sep_token="###",
     stop_token="###",
     extra_stop_sequences=["</s>"],
-    generation_params=dict(do_sample=1, temperature=0.6, top_p=0.9),
+    generation_params=dict(do_sample=1, temperature=0.7, top_p=0.9),
 )
 
 MODEL_FAMILIES = {
@@ -23,11 +23,15 @@ MODEL_FAMILIES = {
             default_chat_config,
         ),
         ModelConfig(
-            ModelBackendConfig(repository="meta-llama/Llama-2-70b-chat-hf"),
+            ModelBackendConfig(repository="codellama/CodeLlama-34b-Instruct-hf", aliases=["codellama/CodeLlama-34b-Instruct-hf"]),
             ModelFrontendConfig(
-                name="Llama 2 (70B-Chat)",
-                model_card="https://huggingface.co/meta-llama/Llama-2-70b-chat-hf",
-                license="https://bit.ly/llama2-license",
+                name="Code Llama (34B)",
+                model_card="https://huggingface.co/codellama/CodeLlama-34b-Instruct-hf",
+                license="https://huggingface.co/codellama/CodeLlama-34b-Instruct-hf/blob/main/LICENSE.txt",
+            ),
+            ModelChatConfig(
+                max_session_length=8192,
+                generation_params=dict(do_sample=1, temperature=0.4, top_p=0.9, repetition_penalty=1.17),
             ),
             default_chat_config,
         ),
@@ -49,48 +53,11 @@ MODEL_FAMILIES = {
             ),
         ),
     ],
-    "Llama": [
-        ModelConfig(
-            ModelBackendConfig(repository="huggyllama/llama-65b", adapter="timdettmers/guanaco-65b"),
-            ModelFrontendConfig(
-                name="Guanaco-65B",
-                model_card="https://huggingface.co/timdettmers/guanaco-65b",
-                license="https://huggingface.co/timdettmers/guanaco-65b",
-            ),
-            default_chat_config,
-        ),
-        ModelConfig(
-            ModelBackendConfig(repository="huggyllama/llama-65b"),
-            ModelFrontendConfig(
-                name="Llama-65B",
-                model_card="https://github.com/facebookresearch/llama/blob/llama_v1/MODEL_CARD.md",
-                license="https://bit.ly/llama-license",
-            ),
-            default_chat_config,
-        ),
-    ],
-    "BLOOM": [
-        ModelConfig(
-            ModelBackendConfig(repository="bigscience/bloomz"),
-            ModelFrontendConfig(
-                name="BLOOMZ-176B",
-                model_card="https://huggingface.co/bigscience/bloomz",
-                license="https://bit.ly/bloom-license",
-            ),
-            ModelChatConfig(
-                max_session_length=2048,
-                sep_token="\n\n",
-                stop_token="</s>",
-                extra_stop_sequences=["\n\nHuman"],
-                generation_params=default_chat_config.generation_params,
-            ),
-        ),
-    ],
 }
 
-INITIAL_PEERS = PUBLIC_INITIAL_PEERS
+# INITIAL_PEERS = PUBLIC_INITIAL_PEERS
 # Set this to a list of multiaddrs to connect to a private swarm instead of the public one, for example:
-# INITIAL_PEERS = ['/ip4/10.1.2.3/tcp/31234/p2p/QmcXhze98AcgGQDDYna23s4Jho96n8wkwLJv78vxtFNq44']
+INITIAL_PEERS = ['/ip4/172.31.2.150/tcp/31338/p2p/QmNtjSe4ku5WCuv3uREAw2DUSFsuBrwGkPR31hpdLct4ox']
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
