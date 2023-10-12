@@ -1,20 +1,10 @@
-# Petals Chat
-
-A chatbot [web app](https://chat.petals.dev) + HTTP and WebSocket endpoints for LLM inference with the [Petals](https://petals.dev) client
-
-## Interactive Chat
-
-<div align="center">
-<img src="https://i.imgur.com/QVTzc6u.png" width="600px">
-</div>
-
-You can try it out at **https://chat.petals.dev** or run the backend on your server using these commands:
+You can run the backend on your server using these commands:
 
 ```bash
-git clone https://github.com/petals-infra/chat.petals.dev.git
-cd chat.petals.dev
+git clone https://github.com/gaborkukucska/api.petals.dev.git
+cd api.petals.dev
 pip install -r requirements.txt
-flask run --host=0.0.0.0 --port=5000
+flask run --host=0.0.0.0 --port=4321
 ```
 
 🦙 **Want to serve Llama 2?** Request access to its weights at the ♾️ [Meta AI website](https://ai.meta.com/resources/models-and-libraries/llama-downloads/) and 🤗 [Model Hub](https://huggingface.co/meta-llama/Llama-2-70b-hf), then run `huggingface-cli login` in the terminal before starting the web app. If you don't want Llama 2, just remove the `meta-llama` models from [config.py](https://github.com/petals-infra/chat.petals.dev/blob/main/config.py).
@@ -22,7 +12,7 @@ flask run --host=0.0.0.0 --port=5000
 🦄 **Deploying with Gunicorn.** In production, we recommend using gunicorn instead of the Flask dev server:
 
 ```bash
-gunicorn app:app --bind 0.0.0.0:5000 --worker-class gthread --threads 100 --timeout 1000
+gunicorn app:app --bind 0.0.0.0:4321 --worker-class gthread --threads 100 --timeout 1000
 ```
 
 The chat uses the WebSocket API under the hood.
