@@ -8,7 +8,7 @@ default_chat_config = ModelChatConfig(
     sep_token="###",
     stop_token="###",
     extra_stop_sequences=["</s>"],
-    generation_params=dict(do_sample=1, temperature=0.7, top_p=0.9),
+    generation_params=dict(do_sample=1, temperature=0.5, top_p=0.9, repetition_penalty=1.17),
 )
 
 MODEL_FAMILIES = {
@@ -29,10 +29,10 @@ MODEL_FAMILIES = {
                 model_card="https://huggingface.co/codellama/CodeLlama-34b-Instruct-hf",
                 license="https://huggingface.co/codellama/CodeLlama-34b-Instruct-hf/blob/main/LICENSE.txt",
             ),
-            ModelChatConfig(
-                max_session_length=8192,
-                generation_params=dict(do_sample=1, temperature=0.4, top_p=0.9, repetition_penalty=1.17),
-            ),
+#            ModelChatConfig(
+#                max_session_length=8192,
+#                generation_params=dict(do_sample=1, temperature=0.4, top_p=0.9, repetition_penalty=1.17),
+#            ),
             default_chat_config,
         ),
     ],
