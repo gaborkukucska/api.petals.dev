@@ -59,16 +59,16 @@ This may be done from any programming language.
 <details>
 <summary><b>Example code (Javascript)</b></summary>
 
-This code opens an inference session with the [stabilityai/StableBeluga2](https://huggingface.co/stabilityai/StableBeluga2) model, sends the prompt "A cat sat on",
-and samples new tokens until the total length reaches 30 tokens. Sampling is done with [temperature](https://huggingface.co/blog/how-to-generate#sampling) = 0.6 and [top_p](https://huggingface.co/blog/how-to-generate#top-p-nucleus-sampling) = 0.9.
+This code opens an inference session with the CodeLlama model, sends the prompt "A cat sat on",
+and samples new tokens until the total length reaches 30 tokens. Sampling is done with temperature = 0.4 and top_p = 0.9.
 
 ```javascript
-const ws = new WebSocket(`wss://chat.petals.dev/api/v2/generate`);
+const ws = new WebSocket(`ws://localhost:4321/api/v2/generate`);
 ws.onopen = () => {
     const prompt = "A cat sat on";
     const maxLength = 30;
     ws.send(JSON.stringify({
-        type: "open_inference_session", model: "stabilityai/StableBeluga2", max_length: maxLength
+        type: "open_inference_session", model: "code", max_length: maxLength
     }));
     ws.send(JSON.stringify({
         type: "generate", inputs: prompt, max_length: maxLength, do_sample: 1, temperature: 0.6, top_p: 0.9
