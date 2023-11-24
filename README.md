@@ -4,7 +4,7 @@ You can run the backend on your server using these commands:
 git clone https://github.com/gaborkukucska/api.petals.dev.git
 cd api.petals.dev
 pip install -r requirements.txt
-flask run --host=0.0.0.0 --port=4321
+flask run --host=0.0.0.0 --port=46267
 ```
 
 🦙 **Want to serve Llama 2?** Request access to its weights at the ♾️ [Meta AI website](https://ai.meta.com/resources/models-and-libraries/llama-downloads/) and 🤗 [Model Hub](https://huggingface.co/meta-llama/Llama-2-70b-hf), then run `huggingface-cli login` in the terminal before starting the web app. If you don't want Llama 2, just remove the `meta-llama` models from [config.py](https://github.com/petals-infra/chat.petals.dev/blob/main/config.py).
@@ -12,7 +12,7 @@ flask run --host=0.0.0.0 --port=4321
 🦄 **Deploying with Gunicorn.** In production, we recommend using gunicorn instead of the Flask dev server:
 
 ```bash
-gunicorn app:app --bind 0.0.0.0:4321 --worker-class gthread --threads 100 --timeout 1000
+gunicorn app:app --bind 0.0.0.0:46267 --worker-class gthread --threads 100 --timeout 1000
 ```
 
 The chat uses the WebSocket API under the hood.
@@ -63,7 +63,7 @@ This code opens an inference session with the CodeLlama model, sends the prompt 
 and samples new tokens until the total length reaches 30 tokens. Sampling is done with temperature = 0.4 and top_p = 0.9.
 
 ```javascript
-const ws = new WebSocket(`ws://localhost:4321/api/v2/generate`);
+const ws = new WebSocket(`ws://localhost:46267/api/v2/generate`);
 ws.onopen = () => {
     const prompt = "A cat sat on";
     const maxLength = 30;
