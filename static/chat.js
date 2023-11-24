@@ -7,7 +7,7 @@ function getConfig() {
 
 var ws = null;
 var position = 0;
-const initialSessionLength = 512;
+const initialSessionLength = 2048;
 var sessionLength = initialSessionLength;
 var connFailureBefore = false;
 
@@ -183,7 +183,7 @@ function handleFailure(message, autoRetry = false) {
     }
     const maxSessionLength = getConfig().chat.max_session_length;
     if (/Maximum length exceeded/.test(message) && sessionLength < maxSessionLength) {
-      // We gradually increase sessionLength to save server resources. Default: 512 -> 2048 -> 8192 (if supported)
+      // We gradually increase sessionLength to save server resources. Default: 2048 -> 8192 -> 100000 (if supported)
       sessionLength = Math.min(sessionLength * 4, maxSessionLength);
       autoRetry = true;
     }
