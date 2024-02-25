@@ -36,29 +36,29 @@ MODEL_FAMILIES = {
             default_chat_config,
         ),
     ],
-    "Falcon": [
-        ModelConfig(
-            ModelBackendConfig(repository="tiiuae/falcon-180B-chat", public_api=False),
-            ModelFrontendConfig(
-                name="Falcon 180B-Chat",
-                model_card="https://huggingface.co/tiiuae/falcon-180B-chat",
-                license="https://huggingface.co/spaces/tiiuae/falcon-180b-license/blob/main/LICENSE.txt",
-            ),
-            ModelChatConfig(
-                max_session_length=8192,
-                sep_token="\n",
-                stop_token="\n",
-                extra_stop_sequences=["<|endoftext|>", "\nFalcon:", " Falcon:", "\nUser:", " User:", "###"],
-                generation_params=dict(do_sample=1, temperature=0.75, top_p=0.9, repetition_penalty=1.2),
-            ),
-        ),
-    ],
+#    "Falcon": [
+#        ModelConfig(
+#            ModelBackendConfig(repository="tiiuae/falcon-180B-chat", public_api=False),
+#            ModelFrontendConfig(
+#                name="Falcon 180B-Chat",
+#                model_card="https://huggingface.co/tiiuae/falcon-180B-chat",
+#                license="https://huggingface.co/spaces/tiiuae/falcon-180b-license/blob/main/LICENSE.txt",
+#            ),
+#            ModelChatConfig(
+#                max_session_length=8192,
+#                sep_token="\n",
+#                stop_token="\n",
+#                extra_stop_sequences=["<|endoftext|>", "\nFalcon:", " Falcon:", "\nUser:", " User:", "###"],
+#                generation_params=dict(do_sample=1, temperature=0.75, top_p=0.9, repetition_penalty=1.2),
+#            ),
+#        ),
+#    ],
 }
 
 # INITIAL_PEERS = PUBLIC_INITIAL_PEERS
 # Set this to a list of multiaddrs to connect to a private swarm instead of the public one, for example:
 # --initial_peers /ip4/49.194.167.186/tcp/31337/p2p/QmNbWmdMF4mrHYBZvaX1aWmEHw1i6Sh7E1sVZdqE1LFbFm
-INITIAL_PEERS = ['/ip4/192.168.1.29/tcp/31337/p2p/QmaRgjKczTzBE3Dup3BQZWGZ2YbzJzsuLykJdp7fBGnJgp']
+INITIAL_PEERS = ['/ip4/192.168.1.29/tcp/31337/p2p/QmXWbuJQTs1eQiwV6SpPdup4hXXvKmNZCpX5XrRYk3EgVj']
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
