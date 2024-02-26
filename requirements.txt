@@ -1,4 +1,4 @@
-git+https://github.com/gaborkukucska/petals
+git+https://github.com/gaborkukucska/oldpetals
 Flask
 flask-sock
 flask-cors
